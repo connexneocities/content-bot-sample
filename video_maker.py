@@ -4,6 +4,7 @@ import os
 import textwrap
 import requests
 from io import BytesIO
+import numpy as np
 
 OUTPUT_DIR = "output"
 ASSETS_DIR = "assets"
