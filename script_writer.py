@@ -54,7 +54,10 @@ OUTPUT FORMAT (JSON only, no markdown):
     try:
         response = requests.post(GEMINI_URL, headers=headers, params=params, json=body)
         result = response.json()
-        text = result["candidates"][0]["content"]["parts"][0]["text"]
+        candidates = result.get("candidates", [])
+        if not candidates:
+            raise Exception("No candidates in response")
+        text = candidates[0]["content"]["parts"][0]["text"]
 
         # Clean and parse JSON
         text = text.replace("```json", "").replace("```", "").strip()
